@@ -82,34 +82,57 @@ export default function Dashboard() {
     fetchStats();
 
     // Load last registered member on page load
+    let lastSeenId = 0;
     async function fetchLatest() {
       try {
         const { data } = await api.get("/register/");
         if (data.length > 0) {
-          const latest = data[0]; // already sorted by id desc
-          showAnnouncement(latest);
+          const latest = data[0];
+          if (latest.id !== lastSeenId) {
+            lastSeenId = latest.id;
+            showAnnouncement(latest);
+          }
         }
       } catch { /* silent */ }
     }
     fetchLatest();
 
-    const wsBase = import.meta.env.VITE_WS_URL || "ws://localhost:8000";
-    ws.current = new WebSocket(`${wsBase}/ws`);
+    // Poll every 15 seconds as a reliable fallback
+    const pollInterval = setInterval(() => {
+      fetchStats();
+      fetchLatest();
+    }, 15000);
 
-    ws.current.onmessage = (e) => {
-      try {
-        const data = JSON.parse(e.data);
-        if (data.event === "new_registration") {
-          showAnnouncement(data.data);
-          if (data.statistics) setStats(data.statistics);
-          else fetchStats();
-        }
-      } catch {
-        /* ignore */
-      }
-    };
+    // WebSocket with auto-reconnect
+    function connectWs() {
+      const wsBase = import.meta.env.VITE_WS_URL || "ws://localhost:8000";
+      ws.current = new WebSocket(`${wsBase}/ws`);
+
+      ws.current.onmessage = (e) => {
+        try {
+          const data = JSON.parse(e.data);
+          if (data.event === "new_registration") {
+            showAnnouncement(data.data);
+            if (data.data?.id) lastSeenId = data.data.id;
+            if (data.statistics) setStats(data.statistics);
+            else fetchStats();
+          }
+        } catch { /* ignore */ }
+      };
+
+      ws.current.onclose = () => {
+        // Auto-reconnect after 5 seconds
+        setTimeout(connectWs, 5000);
+      };
+
+      ws.current.onerror = () => {
+        ws.current?.close();
+      };
+    }
+    connectWs();
 
     return () => {
+      clearInterval(pollInterval);
       ws.current?.close();
       if (announcementTimer.current) clearTimeout(announcementTimer.current);
     };
