@@ -1,0 +1,460 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────
+   Unnati Brand Theme
+   Primary:  Steel Blue (#4A6FA5 → #2C3E6B)
+   Accent:   Golden Ochre (#D4A843)
+   Alert:    Indian Red (#C45B5B)
+   Surface:  Soft blue-gray (#E8ECF1)
+   ───────────────────────────────── */
+
+:root {
+  --unnati-primary: #3B5998;
+  --unnati-primary-dark: #2C3E6B;
+  --unnati-primary-deeper: #1E2D52;
+  --unnati-primary-light: #5A7FBF;
+  --unnati-accent: #D4A843;
+  --unnati-accent-light: #F0D68A;
+  --unnati-red: #C45B5B;
+  --unnati-surface: #E8ECF1;
+  --unnati-surface-dark: #D0D7E3;
+  --unnati-text: #1A2640;
+  --unnati-text-muted: #6B7C99;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--unnati-surface);
+  color: var(--unnati-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.input {
+  @apply border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none;
+}
+
+/* ─── Unnati Glassmorphism ─── */
+.glass-unnati {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 89, 152, 0.15);
+}
+
+.glass-dark {
+  background: rgba(44, 62, 107, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(59, 89, 152, 0.12);
+  box-shadow: 0 4px 24px rgba(44, 62, 107, 0.08);
+}
+
+/* ─── Unnati Gradients ─── */
+.bg-unnati-gradient {
+  background: linear-gradient(135deg, #3B5998 0%, #2C3E6B 50%, #1E2D52 100%);
+}
+
+.bg-unnati-surface {
+  background: linear-gradient(135deg, #E8ECF1 0%, #D0D7E3 50%, #C5CCDb 100%);
+}
+
+.text-unnati-gradient {
+  background: linear-gradient(135deg, var(--unnati-primary) 0%, var(--unnati-primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Animations ─── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-40px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  70% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes blob {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+@keyframes announcement {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-3deg);
+  }
+
+  50% {
+    transform: scale(1.03) rotate(1deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glow-unnati {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(59, 89, 152, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 24px rgba(59, 89, 152, 0.6);
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-gold {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(212, 168, 67, 0);
+  }
+}
+
+/* ─── Animation classes ─── */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.8s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-blob {
+  animation: blob 20s infinite;
+}
+
+.animate-announcement {
+  animation: announcement 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-count-up {
+  animation: countUp 0.6s ease-out;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background-size: 200% 100%;
+}
+
+.animate-glow-unnati {
+  animation: glow-unnati 2s ease-in-out infinite;
+}
+
+.animate-checkmark {
+  animation: checkmark 0.4s ease-out forwards;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* ─── Animation delays ─── */
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-500 {
+  animation-delay: 0.5s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.animation-delay-700 {
+  animation-delay: 0.7s;
+}
+
+.animation-delay-800 {
+  animation-delay: 0.8s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 0.8s ease-in-out 0.3s both;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fadeIn 0.8s ease-in-out 0.6s both;
+}
+
+/* ─── Confetti ─── */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--unnati-accent);
+  animation: confetti 3s infinite;
+}
+
+.confetti:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  background: var(--unnati-accent);
+}
+
+.confetti:nth-child(2) {
+  left: 30%;
+  animation-delay: 0.5s;
+  background: var(--unnati-primary-light);
+}
+
+.confetti:nth-child(3) {
+  left: 50%;
+  animation-delay: 1s;
+  background: var(--unnati-accent-light);
+}
+
+.confetti:nth-child(4) {
+  left: 70%;
+  animation-delay: 1.5s;
+  background: #ffffff;
+}
+
+.confetti:nth-child(5) {
+  left: 90%;
+  animation-delay: 2s;
+  background: var(--unnati-red);
+}
+
+/* ─── Active nav link ─── */
+.nav-link-active {
+  color: var(--unnati-primary);
+  background: rgba(59, 89, 152, 0.08);
+  box-shadow: inset 0 -2px 0 0 var(--unnati-primary);
+}
+
+/* ─── Checkmark pop-in ─── */
+@keyframes checkmarkPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-checkmark {
+  animation: checkmarkPop 0.5s ease-out both;
+}
+
+/* ─── Progress bar fill ─── */
+@keyframes progressFill {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress {
+  animation: progressFill 3.5s ease-in-out both;
+}

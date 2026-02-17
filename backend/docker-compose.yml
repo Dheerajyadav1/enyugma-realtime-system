@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: fest-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: festuser
+      POSTGRES_PASSWORD: festpass
+      POSTGRES_DB: festdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: fest-backend
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
