@@ -72,13 +72,7 @@ export default function DonorTiers() {
             await api.patch(`/register/${registrationId}/donor-tier`, {
                 donor_tier: tierKey,
             });
-            toast.success("Contribution tier selected!", {
-                style: {
-                    background: "var(--unnati-primary-dark)",
-                    color: "#fff",
-                    borderRadius: "12px",
-                },
-            });
+            // Show welcome message, then redirect to dashboard
             setShowWelcome(true);
             setTimeout(() => {
                 navigate("/dashboard");
